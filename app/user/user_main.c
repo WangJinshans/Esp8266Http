@@ -5,7 +5,7 @@
 #include "driver/uart.h"  //串口0需要的头文件
 #include "gpio.h"
 #define NET_DOMAIN "192.168.1.117"
-#define pheadbuffer "GET /EspTestServlet?name=wangjinshan HTTP/1.1\r\nUser-Agent: curl/7.37.0\r\nHost: 192.168.1.117:8088\r\nAccept: */*\r\n\r\n"
+#define pheadbuffer "GET /EspTestServlet?name=yourData HTTP/1.1\r\nUser-Agent: curl/7.37.0\r\nHost: 192.168.1.117:8088\r\nAccept: */*\r\n\r\n"
 #define pheadbuffers "GET /index.jsp HTTP/1.1\r\nAccept: */*\r\nHost: 192.168.1.117:8088\r\nConnection: Keep-Alive\r\n\r\n"
 #define packet_size   (2 * 1024)
 

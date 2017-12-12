@@ -4,9 +4,9 @@
 #include  "osapi.h"
 #include "driver/uart.h"  //串口0需要的头文件
 #include "gpio.h"
-#define NET_DOMAIN "67.216.199.179"
-#define pheadbuffer "GET /EspTestServlet?name=wangjinshan HTTP/1.1\r\nUser-Agent: curl/7.37.0\r\nHost: 67.216.199.179:8088\r\nAccept: */*\r\n\r\n"
-#define pheadbuffers "GET /index.jsp HTTP/1.1\r\nAccept: */*\r\nHost: 67.216.199.179:8088\r\nConnection: Keep-Alive\r\n\r\n"
+#define NET_DOMAIN "192.168.1.117"
+#define pheadbuffer "GET /EspTestServlet?name=wangjinshan HTTP/1.1\r\nUser-Agent: curl/7.37.0\r\nHost: 192.168.1.117:8088\r\nAccept: */*\r\n\r\n"
+#define pheadbuffers "GET /index.jsp HTTP/1.1\r\nAccept: */*\r\nHost: 192.168.1.117:8088\r\nConnection: Keep-Alive\r\n\r\n"
 #define packet_size   (2 * 1024)
 
 LOCAL os_timer_t test_timer;
@@ -24,16 +24,16 @@ LOCAL void delay_ms(uint16 x)
 
 LOCAL void ICACHE_FLASH_ATTR startLed(void)
 {
-		PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTMS_U, FUNC_GPIO14); //选择GPIO14
+		PIN_FUNC_SELECT(PERIPHS_IO_MUX_MTMS_U, FUNC_GPIO14); 
 		GPIO_OUTPUT_SET(GPIO_ID_PIN(14), 1); //GPIO14为高
 		while (1) {
-			system_soft_wdt_feed(); //这里我们喂下看门狗  ，不让看门狗复位
-			GPIO_OUTPUT_SET(GPIO_ID_PIN(14), 1);			//GPIO14为高
+			system_soft_wdt_feed(); //不让看门狗复位
+			GPIO_OUTPUT_SET(GPIO_ID_PIN(14), 1);
 			os_printf("\r\non\r\n");
-			delay_ms(500);                                  //延时500MS
-			GPIO_OUTPUT_SET(GPIO_ID_PIN(14), 0);            //GPIO14为低
+			delay_ms(500);   
+			GPIO_OUTPUT_SET(GPIO_ID_PIN(14), 0); 
 			os_printf("\r\noff\r\n");
-			delay_ms(500);                                  //延时500MS
+			delay_ms(500);
 		}
 }
 /******************************************************************************
@@ -216,7 +216,7 @@ void ICACHE_FLASH_ATTR user_check_ip(void)
 #else
 
 
-       const char esp_tcp_server_ip[4] = {67, 216, 199, 179}; // remote IP of TCP server
+       const char esp_tcp_server_ip[4] = {192, 168, 1, 117}; // remote IP of TCP server
 
        os_memcpy(user_tcp_conn.proto.tcp->remote_ip, esp_tcp_server_ip, 4);
 
@@ -258,8 +258,8 @@ void ICACHE_FLASH_ATTR user_check_ip(void)
 void ICACHE_FLASH_ATTR user_set_station_config(void)
 {
    // Wifi configuration
-   char ssid[32] = "ASS_WE_CAN";
-   char password[64] = "wangyilican";
+   char ssid[32] = "YourWiFiName";
+   char password[64] = "PassWord";
    struct station_config stationConf;
 
    os_memset(stationConf.ssid, 0, 32);
